@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { chainwayR6Service } from '../services/chainway-r6.service';
 import { UHFTagInfo, ConnectionStatus } from '../types/rfid.types';
 import './RFIDReader.css';

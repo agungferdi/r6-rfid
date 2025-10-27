@@ -17,8 +17,6 @@ class ChainwayR6Service implements BluetoothService {
   // UHF BLE Service UUID (standard for Chainway devices)
   private readonly SERVICE_UUID = '0000fff0-0000-1000-8000-00805f9b34fb';
   private readonly CHARACTERISTIC_UUID = '0000fff1-0000-1000-8000-00805f9b34fb';
-  
-  private isInventoryRunning = false;
 
   /**
    * Connect to the Chainway R6 device via Bluetooth
@@ -90,7 +88,6 @@ class ChainwayR6Service implements BluetoothService {
       // Format: Header(0xA0) + Length + Command(0x27) + Checksum
       const command = new Uint8Array([0xA0, 0x04, 0x01, 0x27, 0xCC]);
       await this.characteristic.writeValue(command);
-      this.isInventoryRunning = true;
       console.log('Started inventory');
       return true;
     } catch (error) {
@@ -113,7 +110,6 @@ class ChainwayR6Service implements BluetoothService {
       // Format: Header(0xA0) + Length + Command(0x28) + Checksum
       const command = new Uint8Array([0xA0, 0x04, 0x01, 0x28, 0xCD]);
       await this.characteristic.writeValue(command);
-      this.isInventoryRunning = false;
       console.log('Stopped inventory');
       return true;
     } catch (error) {
@@ -265,7 +261,6 @@ class ChainwayR6Service implements BluetoothService {
     this.device = null;
     this.server = null;
     this.characteristic = null;
-    this.isInventoryRunning = false;
   }
 
   /**
